@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ajouter un utilisateur</title>
+  <link rel="stylesheet" href="Client.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-auth-compat.js"></script>
+</head>
+
+<body class="horizontal-gradient">
+  <div class="bg-animation">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    <div id="stars4"></div>
+  </div>
+
+  <header>
+    <div class="button-container">
+      <a href="Interface.html">
+        <button class="action-button">Interface</button>
+      </a>
+    </div>
+  </header>
+
+
+<h1>Ajouter un utilisateur</h1>
+
+  <div class="form" id="deleteUserForm">
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" placeholder="Adresse e-mail..." required><br>
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="password" placeholder="Mot de passe..." required><br>
+    <button type="button" id="submit-btn" onclick="signUp()">Sign Up</button>
+</div>
+
+  <script src="Client.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suppression d'un utilisateur avec Firebase</title>
+    <link rel="stylesheet" href="suppUID.css">
+</head>
+
+<body class="horizontal-gradient">
+    <div class="bg-animation">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+        <div id="stars4"></div>
+    </div>
+
+    <header>
+        <div class="button-container">
+            <a href="Interface.html">
+                <button class="action-button">Interface</button>
+            </a>
+        </div>
+    </header>
+
+    <h1>Supprimer utilisateur</h1>
+
+    <!-- Formulaire pour saisir l'email et le mot de passe de l'utilisateur à supprimer -->
+    <form id="deleteUserForm">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required><br>
+        <button type="submit" id="deleteUserBtn">Supprimer l'utilisateur</button>
+    </form>
+
+    <!-- Affichage du résultat de la suppression -->
+    <div id="deleteResult" style="display: none;">
+        <p id="deleteMessage"></p>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-auth-compat.js"></script>
+
+    <script>
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAo9d7pb7sf3PuSWDWYtSrdMEx9mjUfAVg",
+            authDomain: "rechargehub-94a85.firebaseapp.com",
+            databaseURL: "https://rechargehub-94a85-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "rechargehub-94a85",
+            storageBucket: "rechargehub-94a85.appspot.com",
+            messagingSenderId: "540530082373",
+            appId: "1:540530082373:web:e77f9e3cf80b88d136192c",
+            measurementId: "G-25WBJEQWFR"
+        };
+
+        // Initialiser Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Gérer la soumission du formulaire pour supprimer un utilisateur
+        document.getElementById("deleteUserForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Supprimer l'utilisateur
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    user.delete().then(() => {
+                        // L'utilisateur est supprimé de Firebase
+                        console.log("Utilisateur supprimé :", user);
+                        document.getElementById("deleteMessage").textContent = "L'utilisateur a été supprimé de Firebase avec succès.";
+                    }).catch((error) => {
+                        console.error("Erreur lors de la suppression de l'utilisateur Firebase :", error);
+                        document.getElementById("deleteMessage").textContent = "Erreur lors de la suppression de l'utilisateur de Firebase : " + error.message;
+                    });
+                }).catch((error) => {
+                    console.error("Erreur lors de la connexion :", error);
+                    document.getElementById("deleteMessage").textContent = "Erreur lors de la connexion : " + error.message;
+                });
+
+            // Afficher le résultat de la suppression
+            document.getElementById("deleteResult").style.display = "block";
+        });
+
+        // Fonction pour rechercher et supprimer un utilisateur par e-mail
+        document.getElementById("deleteUserBtn").addEventListener('click', function () {
+            const emailToDelete = document.getElementById('email').value;
+
+
+            fetch(`http://192.168.5.70:3000/users?email=${emailToDelete}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    let foundUser = data.find(user => user.email === emailToDelete);
+                    if (foundUser) {
+                        console.log(foundUser);
+                        console.log(foundUser.UID);
+
+                        fetch(`http://192.168.5.70:3000/users/${foundUser.UID}`, {
+                            method: 'DELETE',
+                        })
+                            .then(response => response.json())
+                            .then(data => console.log(data))
+                            .catch(error => console.error('Error:', error));
+                    } else {
+                        console.log("Utilisateur non trouvé");
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>RechargeHub</title>
+  <link rel="stylesheet" href="Interface.css">
+  <link rel="icon" href="newlogo.jpg" type="image/x-icon">
+</head>
+
+<body class="horizontal-gradient">
+  <div class="bg-animation">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    <div id="stars4"></div>
+  </div>
+  <header>
+
+    
+    <div class="right-aligned">
+      <button id="main-button" class="action-button" aria-label="Actions">Menu</button>
+    </div>
+    <div id="vertical-menu" class="vertical-menu">
+      <span id="close-button" class="close-button">&times;</span>
+      <a href="Client.html"><button aria-label="Ajouter client">Ajouter utilisateur</button></a>
+      <a href="suppUID.html"><button aria-label="Supprimer client">Supprimer utilisateur</button></a>
+      <a href="ajtprise.html"><button aria-label="Ajouter prise ">Ajouter prise </button></a>
+      <a href="sup_prise.html"><button aria-label="Supprimer prise ">Supprimer prise </button></a>
+    </div>
+    <h1>RechargeHub</h1>
+  </header>
+  
+
+  <main class="produits-container">
+    <section class="produit">
+      <img src="https://st4.depositphotos.com/3265223/24936/v/450/depositphotos_249365890-stock-illustration-electric-plug-icon-vector-logo.jpg" alt="Prise A">
+      <div class="resultat">
+        <ul class="priseInfo priseInfo-A"></ul>
+      </div>
+    </section>
+    
+    <section class="produit">
+      <img src="https://st4.depositphotos.com/3265223/24936/v/450/depositphotos_249365890-stock-illustration-electric-plug-icon-vector-logo.jpg" alt="Prise B">
+      <div class="resultat">
+        <ul class="priseInfo priseInfo-B"></ul>
+      </div>
+    </section>
+    
+    <section class="produit">
+      <img src="https://st4.depositphotos.com/3265223/24936/v/450/depositphotos_249365890-stock-illustration-electric-plug-icon-vector-logo.jpg" alt="Prise C">
+      <div class="resultat">
+        <ul class="priseInfo priseInfo-C"></ul>
+      </div>
+    </section>
+    
+  </main>
+
+  <script src="Client.js"></script>
+  <script src="Interface.js"></script>
+  <script src="ajtprise.js"></script>
+  <script src="server.js"></script>
+</body>
+
+</html>
